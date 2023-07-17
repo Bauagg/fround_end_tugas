@@ -1,0 +1,26 @@
+.container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.menu {
+    margin-left: 50px;
+}
+
+.lis_menu {
+    display: flex;
+    list-style: none;
+}
+
+.lis_menu li {
+    padding-left: 40px;
+
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
