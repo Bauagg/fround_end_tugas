@@ -1,0 +1,83 @@
+.container {
+    margin: 50px auto;
+    width: 1050px;
+    border: 1px solid;
+    justify-content: center;
+    text-align: center;
+}
+
+.input {
+    width: 400px;
+
+}
+
+.btn_1 {
+    padding: 2px 15px;
+    background-color: #40BFFF;
+    border: 1px solid #40BFFF;
+    color: white;
+    cursor: pointer;
+}
+
+.container2 {
+    padding: 10px;
+    margin-top: 50px;
+    border: 1px solid;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minimax(100px, auto);
+    gap: 10px;
+}
+
+.product {
+    width: 250px;
+}
+
+.img {
+    width: 250px;
+}
+
+.p {
+    font-weight: bold;
+    color: #40BFFF;
+    margin-top: -15px;
+}
+
+.beli {
+    padding: 5px 109px;
+    background-color: #40BFFF;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.beli:hover {
+    opacity: .6;
+}
+
+.btn5 {
+    margin-top: 20px;
+}
+
+.delete {
+    padding: 5px 97.5px;
+    background-color: #ffcc40;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.update {
+    padding: 5px 95px;
+    background-color: #40ffa9;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
