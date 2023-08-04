@@ -1,14 +1,13 @@
 .container {
     margin: 50px auto;
     width: 1050px;
-    border: 1px solid;
     justify-content: center;
     text-align: center;
 }
 
 .input {
-    width: 400px;
-
+    width: 520px;
+    margin: auto;
 }
 
 .btn_1 {
@@ -41,7 +40,6 @@
 .p {
     font-weight: bold;
     color: #40BFFF;
-    margin-top: -15px;
 }
 
 .beli {

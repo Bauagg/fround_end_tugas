@@ -1,0 +1,42 @@
+.container {
+    margin: auto;
+    width: 500px;
+    padding: 20px;
+}
+
+.judul {
+    text-align: center;
+}
+
+.container2 {
+    margin: auto;
+    border: 1px solid;
+}
+
+.tabel {
+    padding-right: 20px;
+}
+
+.tabel2 {
+    margin: 40px;
+}
+
+.container3 {
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.p {
+    text-align: justify;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: blue;
+}
+
+.judul2 {
+    text-align: center;
+}

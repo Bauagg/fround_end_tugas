@@ -10,10 +10,12 @@ import Chekout from "../pages/chekout/chekout";
 import Kranjang from "../pages/keranjang/keranjang";
 import ProductDetail from "../pages/product-detail/product-detail";
 import Product from "../pages/product/product";
+import ProductUpdate from "../pages/product/update-Product";
 import Tentang from "../pages/tentang/tentang";
-import Transaksi from "../pages/transaksi/transaksi";
 import Login from "../pages/login/login";
 import Register from "../pages/register/register";
+import GetAddress from "../pages/delivery_address/getAddress";
+import UpdateAddres from "../pages/delivery_address/updateAddres";
 
 // Contact
 export const AutContext = createContext()
@@ -23,7 +25,7 @@ const initialState = {
     isAuthenticated: false,
     user: null,
     token: null,
-    role: null
+    role: null,
 }
 
 const reducer = (state, action) => {
@@ -38,7 +40,7 @@ const reducer = (state, action) => {
                 isAuthenticated: true,
                 user: action.payload.user,
                 token: action.payload.token,
-                role: action.payload.role
+                role: action.payload.role,
             }
 
         case 'LOGOUT':
@@ -48,6 +50,12 @@ const reducer = (state, action) => {
                 isAuthenticated: false,
                 user: null
             }
+
+        case "SET_ADDRESSES":
+            return {
+                ...state,
+                addresses: action.payload,
+            };
 
         default: return state
     }
@@ -76,14 +84,18 @@ const RouterIndex = () => {
                 <Routes>
                     <Route exact path="/" element={<Hompages />} />
                     <Route exact path="/product_detail/:id" element={<ProductDetail />} />
+                    <Route exact path="/product_update/:id" element={<ProductUpdate />} />
                     <Route exact path="/product" element={<Product />} />
                     <Route exact path="/tentang" element={<Tentang />} />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/register" element={<Register />} />
+                    <Route exact path="/updateAddress/:id" element={<UpdateAddres />} />
+                    <Route exact path="/getAddress" element={<GetAddress />} />
+
                     {/* private Router */}
                     <Route path="/kranjang" element={<PrivateRoute element={<Kranjang />} path="/kranjang" />} />
                     <Route path="/chekout" element={<PrivateRoute element={<Chekout />} path="/chekout" />} />
-                    <Route path="/transaksi" element={<PrivateRoute element={<Transaksi />} path="/transaksi" />} />
+                    <Route path="/address" element={<PrivateRoute element={<GetAddress />} path="address" />} />
                 </Routes>
             </AutContext.Provider>
         </div>

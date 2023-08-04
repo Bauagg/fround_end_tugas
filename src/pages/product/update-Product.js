@@ -1,18 +1,18 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from "axios";
 
 // import css product create
 import createStyle from './product-create.module.css'
 
 // import state global
-import { AutContext } from "../../router";
+import { AutContext } from '../../router';
 
-import { useNavigate } from "react-router-dom";
-
-const Product = () => {
+const ProductUpdate = () => {
     const { state } = useContext(AutContext)
+    const { id } = useParams()
     const [nameProduct, setNameProduct] = useState('')
     const [description, setDescription] = useState('')
     const [stock, setStock] = useState(0)
@@ -31,32 +31,28 @@ const Product = () => {
         }
     }
 
-    const hendleCrieteProduct = (e) => {
+    const hendleUpdateProduct = (e) => {
         e.preventDefault()
 
         const datas = {
             name: nameProduct,
-            description: description,
-            stock: parseInt(stock),
+            descriptions: description,
+            stock: parseInt(state),
             price: parseInt(price),
             status: status,
             image: image,
-            tag: selectedTags,
-            category: category
+            category: category,
+            tag: [...selectedTags]
         }
 
-        axios.post(`http://localhost:3000/product`, datas, { headers: { Authorization: `Bearer ${state.token}` } })
-            .then((resoult) => {
-                console.log(resoult.data)
+        axios.put(`http://localhost:3000/product/${id}`, datas, { headers: { Authorization: `Bearer ${state.token}` } })
+            .then(() => {
+                console.log("Product update successful:");
 
                 navigate('/')
             })
             .catch((err) => {
-                if (err.response) {
-                    console.log("Product registration failed:", err.response.data);
-                } else {
-                    console.log("Product registration failed:", err.message);
-                }
+                console.log("Product update error:", err);
             })
     }
 
@@ -65,7 +61,7 @@ const Product = () => {
             <div >
                 <h1 className={createStyle.judul}>POSTING PRODUCT</h1>
                 <div className={createStyle.container2}>
-                    <Form onSubmit={hendleCrieteProduct}>
+                    <Form onSubmit={hendleUpdateProduct}>
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridEmail">
                                 <Form.Label>Name Product</Form.Label>
@@ -102,7 +98,7 @@ const Product = () => {
 
                         <Row className="mb-2">
                             <Form.Group as={Col} controlId="formGridCity">
-                                <Form.Label className={createStyle.tags}>Tags :</Form.Label>
+                                <Form.Label>Tags :</Form.Label>
                                 {['digital', 'smartphone', 'laptop', 'jas', 'spatu', 'kemeja', 'roti', 'nasi', 'daging'].map((tag) => (
                                     <Form.Check
                                         inline
@@ -110,7 +106,8 @@ const Product = () => {
                                         label={tag}
                                         type='checkbox'
                                         checked={selectedTags.includes(tag)}
-                                        onChange={() => hendleTags(tag)} />
+                                        onChange={() => hendleTags(tag)}
+                                    />
                                 ))}
                             </Form.Group>
 
@@ -132,19 +129,19 @@ const Product = () => {
                                 <Col sm={10}>
                                     <Form.Check
                                         type="radio"
-                                        checked={status === true}
                                         label="product ready"
                                         name="formHorizontalRadios"
                                         id="formHorizontalRadios1"
-                                        onChange={(e) => setStatus(true)}
+                                        checked={status === true}
+                                        onChange={(e) => setStatus(e.target.value)}
                                     />
                                     <Form.Check
                                         type="radio"
-                                        checked={status === false}
                                         label="Product is out"
                                         name="formHorizontalRadios"
                                         id="formHorizontalRadios2"
-                                        onChange={(e) => setStatus(false)}
+                                        checked={status === false}
+                                        onChange={(e) => setStatus(e.target.value)}
                                     />
                                 </Col>
                             </Form.Group>
@@ -160,4 +157,4 @@ const Product = () => {
     )
 }
 
-export default Product
+export default ProductUpdate

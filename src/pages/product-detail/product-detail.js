@@ -14,14 +14,14 @@ const ProductDetail = () => {
     const { id } = useParams()
     const { state } = useContext(AutContext)
     const [product, setProduct] = useState(null)
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
     const navigate = useNavigate()
 
     useEffect(() => {
         const getProductById = async () => {
             try {
                 const resoult = await axios.get(`http://localhost:3000/product/${id}`)
-                setProduct(resoult.data)
+                setProduct(resoult.data.datas)
             } catch (error) {
                 console.log(error)
             }
@@ -29,15 +29,13 @@ const ProductDetail = () => {
 
         getProductById()
     }, [id])
-    console.log(id)
-    console.log(product)
 
     if (product === null) {
         return <div><Spinner animation="border" variant="primary" /></div>;
     }
 
     const hendelDEcrement = () => {
-        if (quantity > 0) {
+        if (quantity > 1) {
             setQuantity(quantity - 1)
         }
     }
@@ -47,20 +45,13 @@ const ProductDetail = () => {
 
     const hendleAddToCart = () => {
         const cartItem = {
-            product: {
-                id: product._id
-            },
+            product: product._id,
             qty: quantity
         }
 
-        const putDataCart = {
-            items: [cartItem]
-        }
-
-        axios.put('http://localhost:3000/cart', putDataCart, { headers: { Authorization: `Bearer ${state.token}` } })
+        axios.post('http://localhost:3000/cart', cartItem, { headers: { Authorization: `Bearer ${state.token}` } })
 
             .then(() => {
-
                 navigate('/kranjang')
             })
             .catch((err) => {
@@ -84,11 +75,15 @@ const ProductDetail = () => {
                                     <tbody>
                                         <tr>
                                             <td>Category</td>
-                                            <td className={productDetail.td}>{product.category.name}</td>
+                                            {
+                                                product.category ?
+                                                    (<td className={productDetail.td}>{product.category.name}</td>)
+                                                    : (<td>tidak ada category</td>)
+                                            }
                                         </tr >
                                         <tr>
                                             <td>Description</td>
-                                            <td className={productDetail.td}>{product.descriptions}</td>
+                                            <td className={productDetail.td}>{product.description}</td>
                                         </tr>
                                     </tbody >
                                 </table >

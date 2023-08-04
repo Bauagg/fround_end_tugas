@@ -58,11 +58,12 @@ const Login = () => {
                 dispatch({
                     type: 'LOGIN',
                     payload: {
-                        user: respon.data.user,
-                        token: respon.data.token,
-                        role: respon.data.user.role
+                        user: respon.data.datas.user,
+                        token: respon.data.datas.token,
+                        role: respon.data.datas.role
                     }
                 });
+                console.log(respon)
 
                 History('/')
             })
@@ -70,7 +71,7 @@ const Login = () => {
                 setData({ ...data, errorMessage: err.response.data.message })
             })
     }
-
+    console.log(data.errorMessage)
     return (
         <div>
             <div className={login.form_section}>

@@ -32,7 +32,11 @@ const Navbar = () => {
                 <div className={navbar.menu}>
                     <ul className={navbar.lis_menu}>
                         <li><Link className={navbar.link_1} to='/'>Home</Link></li>
-                        <li><Link className={navbar.link_1} to='/product'>Posting Product</Link></li>
+                        {
+                            state.role === 'admin' && (<li><Link className={navbar.link_1} to='/product'>Posting Product</Link></li>)
+                        }
+                        <li><Link className={navbar.link_1} to='/address'>Address</Link></li>
+                        <li><Link className={navbar.link_1} to="/chekout">History</Link></li>
                         <li><Link className={navbar.link_1} to='/tentang'>Tentang Kami</Link></li>
                     </ul>
                 </div>

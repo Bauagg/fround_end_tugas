@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // import register-module.css
@@ -16,6 +17,7 @@ const Register = () => {
     const [role, setRole] = useState('')
     const [errorRole, setErrorRole] = useState('')
     const [errorRegister, setErrorRegister] = useState('')
+    const navigate = useNavigate()
 
     const hendlerFullName = (e) => {
         setFull_name(e.target.value)
@@ -74,6 +76,8 @@ const Register = () => {
             axios.post('http://localhost:3000/register', userData)
                 .then((respon) => {
                     console.log('Registration success: ', respon)
+
+                    navigate('/login')
                 })
                 .catch((err) => {
                     setErrorRegister(err.response.data.error)
